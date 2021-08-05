@@ -13,7 +13,7 @@ import net.fabricmc.api.Environment;
 public class SleepyMod implements DedicatedServerModInitializer
 {
 
-	public static final String MODID = "example";
+	public static final String MODID = "sleepy";
 
 	@Override
 	public void onInitializeServer( )
@@ -36,5 +36,10 @@ public class SleepyMod implements DedicatedServerModInitializer
 	{
 		@Comment("Toggles the entire mod on or off")
 		boolean enabled = true;
+
+		public boolean getEnabled()
+		{
+			return enabled;
+		}
 	}
 }

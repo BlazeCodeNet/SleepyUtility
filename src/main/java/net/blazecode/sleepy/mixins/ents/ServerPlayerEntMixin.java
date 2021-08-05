@@ -1,6 +1,7 @@
 package net.blazecode.sleepy.mixins.ents;
 
 import com.mojang.authlib.GameProfile;
+import net.blazecode.sleepy.SleepyMod;
 import net.blazecode.vanillify.api.VanillaUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -23,7 +24,7 @@ public abstract class ServerPlayerEntMixin extends PlayerEntity
     @Redirect( method = "trySleep", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;setSpawnPoint(Lnet/minecraft/util/registry/RegistryKey;Lnet/minecraft/util/math/BlockPos;FZZ)V"))
     void setSpawnPointRedirect(ServerPlayerEntity serverPlayerEntity, RegistryKey<World> dimension, BlockPos pos, float angle, boolean spawnPointSet, boolean sendMessage)
     {
-        if(serverPlayerEntity.isSneaking())
+        if(serverPlayerEntity.isSneaking() || !SleepyMod.getConfig().getEnabled())
         {
             this.setSpawnPoint(dimension, pos, angle, spawnPointSet, sendMessage);
             serverPlayerEntity.sendMessage(VanillaUtils.getText("You've slept and set your spawn!", Formatting.ITALIC, Formatting.GREEN), false);
