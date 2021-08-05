@@ -1,8 +1,15 @@
-# Fabric Example Mod
+# Sleepy Utilities
+A *FABRIC* mod for various sleep related fixes and changes.
+## Features
 
-## Setup
+You can sleep in a bed without setting your spawnpoint there!
+to set spawn, simply crouch and right-click the bed!
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+## Credit
+This mod was made as part of a reddit post I made.
+Credit for the idea goes entirely to [vidish_suslika](https://www.reddit.com/user/vidish_suslika/)
+from reddit
+
 
 ## License
 
