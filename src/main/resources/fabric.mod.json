@@ -1,30 +1,30 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "sleepy",
   "version": "${version}",
 
-  "name": "ExampleMod",
-  "description": "A server-side mod",
+  "name": "SleepyMod",
+  "description": "A server-side sleep overhaul mod",
   "authors": [
     "BlazeCode",
     "Cosmix"
   ],
   "contact": {
     "homepage": "https://github.com/BlazeCodeNet",
-    "sources": "https://github.com/BlazeCodeNet/fabric-template"
+    "sources": "https://github.com/BlazeCodeNet/SleepyUtility"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/sleepy/icon.png",
 
   "environment": "server",
   "entrypoints": {
     "server": [
-      "net.blazecode.example.ExampleMod"
+      "net.blazecode.sleepy.SleepyMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "sleepy.mixins.json"
   ],
 
   "depends": {
