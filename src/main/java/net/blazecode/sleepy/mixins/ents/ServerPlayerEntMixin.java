@@ -19,20 +19,25 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ServerPlayerEntity.class)
 public abstract class ServerPlayerEntMixin extends PlayerEntity
 {
-    @Shadow public abstract void setSpawnPoint(RegistryKey<World> dimension, @Nullable BlockPos pos, float angle, boolean spawnPointSet, boolean sendMessage);
+    public ServerPlayerEntMixin( World world, BlockPos pos, float yaw, GameProfile profile )
+    {
+        super( world, pos, yaw, profile );
+    }
+    
+    @Shadow public abstract void setSpawnPoint( RegistryKey<World> dimension, @Nullable BlockPos pos, float angle, boolean spawnPointSet, boolean sendMessage);
 
     @Redirect( method = "trySleep", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;setSpawnPoint(Lnet/minecraft/util/registry/RegistryKey;Lnet/minecraft/util/math/BlockPos;FZZ)V"))
     void setSpawnPointRedirect(ServerPlayerEntity serverPlayerEntity, RegistryKey<World> dimension, BlockPos pos, float angle, boolean spawnPointSet, boolean sendMessage)
     {
-        if(serverPlayerEntity.isSneaking() || !SleepyMod.getConfig().getEnabled())
+        boolean triggered = (serverPlayerEntity.isSneaking() && SleepyMod.getConfig().getSpawnpointSetStance() == 0);
+        if(triggered || !SleepyMod.getConfig().getEnabled())
         {
-            this.setSpawnPoint(dimension, pos, angle, spawnPointSet, sendMessage);
-            serverPlayerEntity.sendMessage(VanillaUtils.getText("You've slept and set your spawn!", Formatting.ITALIC, Formatting.GREEN), false);
+            this.setSpawnPoint(dimension, pos, angle, spawnPointSet, false);
+            serverPlayerEntity.sendMessage(VanillaUtils.getText("Spawn point has been set!", Formatting.ITALIC, Formatting.GREEN), false);
         }
-    }
-
-    public ServerPlayerEntMixin(World world, BlockPos pos, float yaw, GameProfile profile)
-    {
-        super(world, pos, yaw, profile);
+        else
+        {
+            serverPlayerEntity.sendMessage(VanillaUtils.getText("Spawn point was skipped!", Formatting.ITALIC, Formatting.YELLOW), false);
+        }
     }
 }

@@ -8,6 +8,7 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
 
 @Environment( EnvType.SERVER )
 public class SleepyMod implements DedicatedServerModInitializer
@@ -36,10 +37,14 @@ public class SleepyMod implements DedicatedServerModInitializer
 	{
 		@Comment("Toggles the entire mod on or off")
 		boolean enabled = true;
+		
+		@Comment("When to set spawnpoint? 0 for crouch, 1 for standing.")
+		int spawnpointSetStance=0;
 
 		public boolean getEnabled()
 		{
 			return enabled;
 		}
+		public int getSpawnpointSetStance() { return spawnpointSetStance; }
 	}
 }
