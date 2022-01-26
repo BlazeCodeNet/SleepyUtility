@@ -38,7 +38,6 @@ dependencies {
 	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
-	modImplementation "maven.modrinth:vanillify:${project.vanillify_version}"
 	modImplementation "me.lucko:fabric-permissions-api:${project.perm_api_version}"
 }
 
